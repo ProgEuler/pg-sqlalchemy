@@ -1,0 +1,55 @@
+# --- Python Specific ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Virtual Environments ---
+# It's highly recommended to keep your local environment out of Git
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# --- Environment Variables / Secrets ---
+# Do NOT commit your secrets
+.env
+.env.*
+!.env.example
+
+# --- FastAPI / Testing ---
+# Coverage reports and test cache
+.pytest_cache/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# --- Databases (if using local SQLite/Docker) ---
+*.db
+*.sqlite3
+
+# --- IDEs and Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
