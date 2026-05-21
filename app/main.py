@@ -79,4 +79,41 @@ def update_user(user_id: int, payload: UserUpdate, db: Session = Depends(get_db)
         )
 
     if payload.email and payload.email != user.email:
+        if db.query(User).filter(User.email == payload.email).first():
+            raise HTTPException(
+                status_code=400,
+                detail="Email already in use"
+            )
+        user.email = payload.email
+
+    if payload.username and payload.username != user.username:
+        if db.query(User).filter(User.username == payload.username).first():
+            raise HTTPException(
+                status_code=400,
+                detail="Username already in use"
+            )
+        user.username = payload.username
+
+
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    return user
+
+@app.delete(f"/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.get(User, user_id)
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    db.deleted(user)
+    db.commit()
+
+    return None
+            
         
